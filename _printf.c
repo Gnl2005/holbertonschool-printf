@@ -1,68 +1,80 @@
 #include "main.h"
-#include <stdio.h>
+#include <stdarg.h>
 #include <unistd.h>
 
 /**
- * _printf - a function that produces output according to a format
- * @format: a character string
+ * print_char - prints a single character
+ * @c: character to print
  *
- * Return: Always 0
+ * Return: 1
+ */
+int print_char(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+/**
+ * print_string - prints a string
+ * @str: string to print
+ *
+ * Return: number of chars printed
+ */
+int print_string(char *str)
+{
+	int count = 0;
+
+	if (!str)
+		str = "(null)";
+
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+		count++;
+	}
+
+	return (count);
+}
+
+/**
+ * _printf - prints formatted output
+ * @format: format string
+ *
+ * Return: number of chars printed
  */
 int _printf(const char *format, ...)
 {
-    va_list args;
-    int count = 0;
-    char *str;
-    char c;
+	va_list args;
+	int count = 0;
 
-    if (!format)
-        return (0); /* NULL olsa 0 qaytarır */
+	if (!format)
+		return (0);
 
-    va_start(args, format);
+	va_start(args, format);
 
-    /* for dövrü ilə hər simvolu oxuyuruq */
-    for (; *format != '\0'; format++)
-    {
-        if (*format == '%')
-        {
-            format++; /* növbəti simvol format tipidir */
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == 'c')
+				count += print_char((char)va_arg(args, int));
+			else if (*format == 's')
+				count += print_string(va_arg(args, char *));
+			else if (*format == '%')
+				count += print_char('%');
+			else
+			{
+				count += print_char('%');
+				count += print_char(*format);
+			}
+		}
+		else
+			count += print_char(*format);
+		format++;
+	}
 
-            if (*format == 'c') /* char */
-            {
-                c = (char) va_arg(args, int);
-                write(1, &c, 1);
-                count++;
-            }
-            else if (*format == 's') /* string */
-            {
-                str = va_arg(args, char *);
-                if (!str)
-                    str = "(null)";
-                for (; *str != '\0'; str++)
-                {
-                    write(1, str, 1);
-                    count++;
-                }
-            }
-            else if (*format == '%') /* procent */
-            {
-                write(1, "%", 1);
-                count++;
-            }
-            else /* unknown format */
-            {
-                write(1, "%", 1);
-                write(1, format, 1);
-                count += 2;
-            }
-        }
-        else /* normal simvol */
-        {
-            write(1, format, 1);
-            count++;
-        }
-    }
-
-    va_end(args);
-    return (count);
+	va_end(args);
+	return (count);
 }
