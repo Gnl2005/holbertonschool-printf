@@ -3,11 +3,15 @@
 
 #include <stdarg.h>
 
-/* Struct for format specifiers */
+/**
+ * struct spec - formata uyğun funksiya saxlamaq üçün struktur
+ * @specifier: format simvolu (məs: "c", "s", "d", "i", "%")
+ * @func: həmin formatı çap edən funksiya pointeri
+ */
 typedef struct spec
 {
-    char *specifier;
-    int (*func)(va_list args, int length);
+	char *specifier;
+	int (*func)(va_list args, int length);
 } spec;
 
 /* Function prototypes */
