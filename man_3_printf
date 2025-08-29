@@ -1,0 +1,27 @@
+.\" Manpage for _printf.
+.\" Contact allahverdiyevasofiya@gmail.com
+.TH man_3_printf "29 Avqust 2025" "Gnl"
+.SH SYNOPSIS
+/fB_printf/fP OPTIONS [%c | %d | %s | %i | %% ]
+.SH DESCRIPTION
+/fB_print/fP Prints VARIABLE or ARGUMENT according to the options used
+Supported format specifiers include:
+.TP
+%c
+Prints a single character.
+.TP
+%s
+Prints a string.
+.TP
+%d
+Prints a signed integer in decimal.
+.TP
+%i
+Prints a signed integer in decimal (same as %d).
+.TP
+%%
+Prints a literal percent sign.
+.SH AUTHOR
+GUNEL ALLAHVERDÄYEVA
+.SH REPORTING BUGS
+Report bugs to allahverdiyevasofiya@gmail.com
