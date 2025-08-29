@@ -53,12 +53,12 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while (*format)
+	for (; *format; format++)
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '\0') /* %-dən sonra heç nə yoxdursa, dayandır */
+			if (*format == '\0')
 				break;
 			else if (*format == 'c')
 				count += print_char((char)va_arg(args, int));
@@ -74,7 +74,6 @@ int _printf(const char *format, ...)
 		}
 		else
 			count += print_char(*format);
-		format++;
 	}
 
 	va_end(args);
