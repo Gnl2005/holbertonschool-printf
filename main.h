@@ -3,8 +3,19 @@
 
 #include <stdarg.h>
 
-int _printf(const char *format, ...);
-int print_char(char c);
-int print_string(char *str);
+/* Struct for format specifiers */
+typedef struct spec
+{
+    char *specifier;
+    int (*func)(va_list args, int length);
+} spec;
 
-#endif
+/* Function prototypes */
+int _printf(const char *format, ...);
+
+int print_char(va_list args, int length);
+int print_string(va_list args, int length);
+int handle_mod(va_list args, int length);
+int print_int(va_list args, int length);
+
+#endif /* MAIN_H */
