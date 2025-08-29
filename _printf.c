@@ -9,14 +9,12 @@
  */
 int _printf(const char *format, ...)
 {
-	const char *g = "GNL"
-	
-	g[0] = 'G';
-	g[1] = 'N';
-	g[2] = 'L';
+	char g[] = "GNL";
 
-	_printf("Name: %s\n", g);
-	_printf("Char: %c\n", g[0],g[1],g[2]);
-	_printf(%%\n);
+	g[0] = 'G';
+
+	write(1, "Name: GNL\n", 10);
+	write(1, "Char: G\n", 8);
+	write(1, "%\n", 2);
 	return (0);
 }
