@@ -1,9 +1,9 @@
 #include "main.h"
-#include <stdarg.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 /**
- * print_char - prints a single character
+ * print_char - prints a single char
  * @c: character to print
  *
  * Return: 1
@@ -18,7 +18,7 @@ int print_char(char c)
  * print_string - prints a string
  * @str: string to print
  *
- * Return: number of chars printed
+ * Return: number of characters printed
  */
 int print_string(char *str)
 {
@@ -33,7 +33,6 @@ int print_string(char *str)
 		str++;
 		count++;
 	}
-
 	return (count);
 }
 
@@ -41,7 +40,7 @@ int print_string(char *str)
  * _printf - prints formatted output
  * @format: format string
  *
- * Return: number of chars printed
+ * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
@@ -53,7 +52,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	for (; *format; format++)
+	for (; *format != '\0'; format++)
 	{
 		if (*format == '%')
 		{
